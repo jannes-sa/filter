@@ -12,7 +12,7 @@ func FilterFloat(t interface{}, prec int) {
 
 		for x := 0; x < s.Len(); x++ {
 			v := reflect.Indirect(s.Index(x))
-			assignFloat(v)
+			assignFloat(v, prec)
 		}
 	} else {
 		var v reflect.Value
@@ -21,21 +21,21 @@ func FilterFloat(t interface{}, prec int) {
 		} else if reflect.TypeOf(t).Elem().Kind() == reflect.Ptr {
 			v = reflect.ValueOf(t).Elem().Elem()
 		}
-		assignFloat(v)
+		assignFloat(v, prec)
 	}
 }
 
-func assignFloat(v reflect.Value) {
+func assignFloat(v reflect.Value, prec int) {
 	for i, n := 0, v.NumField(); i < n; i++ {
 		f := v.Field(i)
-		st, n := checkType(f.Interface())
+		st, n := checkType(f.Interface(), prec)
 		if st {
 			v.Field(i).SetFloat(n)
 		}
 	}
 }
 
-func checkType(t interface{}) (st bool, n float64) {
+func checkType(t interface{}, prec int) (st bool, n float64) {
 	switch t.(type) {
 	case float64:
 		st = true
