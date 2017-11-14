@@ -5,7 +5,8 @@ import (
 	"reflect"
 )
 
-func filterFloat(t interface{}, prec int) {
+// FilterFloat Filtering Float
+func FilterFloat(t interface{}, prec int) {
 	if reflect.TypeOf(t).Elem().Kind() == reflect.Slice {
 		s := reflect.ValueOf(t).Elem()
 

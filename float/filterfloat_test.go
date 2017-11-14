@@ -32,7 +32,7 @@ func TestFilterFloat(t *testing.T) {
 		Name:   "Santoso",
 		Amount: 303.341241245,
 	})
-	filterFloat(&tes, prec)
+	FilterFloat(&tes, prec)
 
 	if tes[0].Amount != 10290.12312 {
 		t.Fatal(10290.12312, "Should be", tes[0].Amount)
@@ -45,7 +45,7 @@ func TestFilterFloat(t *testing.T) {
 	tes2 := &Tes2{
 		Angka: 20.2038209384,
 	}
-	filterFloat(&tes2, prec)
+	FilterFloat(&tes2, prec)
 
 	if (*tes2).Angka != 20.20382 {
 		t.Fatal(20.20382, "Should be", (*tes2).Angka)
